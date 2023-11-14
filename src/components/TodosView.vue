@@ -33,8 +33,8 @@ let boards = reactive([
   },
 ]);
 
-function handleNewItem(text) {
-  console.log(text);
+function handleNewItem(text, board) {
+  console.log(text.value, board.id, board.name);
 }
 </script>
 
@@ -50,7 +50,7 @@ function handleNewItem(text) {
       <div class="board" v-for="board in boards" :key="board.id">
         <div>{{ board.name }}</div>
 
-        <InputNew :on-new-item="handleNewItem" />
+        <InputNew :on-new-item="(text)=> handleNewItem(text, board)" />
 
         <div class="items">
           <div class="item" v-for="item in board.items" :key="item.id">
