@@ -53,10 +53,24 @@ function handleNewBoard() {
   }
 }
 
-function starDrag(evt, board, item){
-
+function starDrag(evt, board, item) {
+  evt.dataTransfer.setData(
+    "text/plain",
+    JSON.stringify({ boardId: board.id, itemId: item.id }) // Enclose the object in quotes
+  );
 }
+
 function onDrop(evt, dest){
+ 
+    const {boardId, itemId} = JSON.parse(
+        evt.dataTransfer.getData("text/plain")
+    );
+
+   const originBoard = boards.find(item=>item.id === boardId);
+   const originItem = originBoard.items.find(item => item.id === itemId)
+
+   console.log(originBoard.name, originItem.title); 
+
 
 }
 
@@ -71,31 +85,32 @@ function onDrop(evt, dest){
     </ul>
   </nav>
 
-  <div class="boards-container">
-    <div class="boards">
-      <div class="board" 
-      @drop="onDrop($event, board)" 
-      @dragover.prevent 
-      @dragenter.prevent  
-      v-for="board in boards" 
-      :key="board.id">
+      <div class="boards-container">
+        <div class="boards">
+          <div 
+          class="board" 
+          @drop="onDrop($event, board)" 
+          @dragover.prevent 
+          @dragenter.prevent  
+          v-for="board in boards" 
+          :key="board.id">
 
-        <div>{{ board.name }}</div>
+            <div>{{ board.name }}</div>
 
-        <InputNew :on-new-item="(text) => handleNewItem(text, board)" />
+            <InputNew :on-new-item="(text) => handleNewItem(text, board)" />
 
-        <div class="items">
-          <div class="item" 
-          draggable="true" 
-          @drastart="starDrag($event, board,item )" 
-          v-for="item in board.items" 
-          :key="item.id">
-            {{ item.title }}
+            <div class="items">
+              <div class="item" 
+              draggable="true" 
+              @dragstart="starDrag($event, board, item)" 
+              v-for="item in board.items" 
+              :key="item.id">
+                {{ item.title }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </template>
 
 <style scoped>
