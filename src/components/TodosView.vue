@@ -42,12 +42,35 @@ function handleNewItem(text, board) {
     });
 
 }
+
+
+function handleNewBoard(){
+
+const name = prompt(' Nombre de la Tabla ');
+
+ if(!!name){
+     
+boards.push({
+
+    id: crypto.randomUUID(),
+    name: name,
+    items: [
+      
+    ],
+
+
+}
+
+);
+
+ }
+}
 </script>
 
 <template>
   <nav>
     <ul>
-      <li><a href="#">Create Board</a></li>
+      <li><a href="#" @click.prevent = "handleNewBoard" >Create Board</a></li>
     </ul>
   </nav>
 
