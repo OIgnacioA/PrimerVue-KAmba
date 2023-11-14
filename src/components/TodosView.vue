@@ -34,7 +34,13 @@ let boards = reactive([
 ]);
 
 function handleNewItem(text, board) {
-  console.log(text.value, board.id, board.name);
+
+    console.log(text.value, board.id, board.name);
+    board.items.push({
+        id: crypto.randomUUID(),
+        title: text,
+    });
+
 }
 </script>
 
