@@ -83,7 +83,7 @@ function onDrop(evt, dest){
 <template>
   <nav>
     <ul>
-      <li><a href="#" @click.prevent="handleNewBoard">Create Board</a></li>
+      <li><a href="#" @click.prevent="handleNewBoard">Tablero Kanban Ñ</a></li>
     </ul>
   </nav>
 
@@ -116,6 +116,26 @@ function onDrop(evt, dest){
 </template>
 
 <style scoped>
+
+nav {
+background-color: black;
+margin-bottom: 10px;
+}
+
+nav ul{
+list-style: none;
+padding: 0;
+margin: 0;
+display: flex;
+} 
+
+nav ul li a {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+
 .drop-zone {
   background-color: #eee;
   margin-bottom: 10px;
