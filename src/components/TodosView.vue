@@ -34,55 +34,62 @@ let boards = reactive([
 ]);
 
 function handleNewItem(text, board) {
-
-    console.log(text.value, board.id, board.name);
-    board.items.push({
-        id: crypto.randomUUID(),
-        title: text,
-    });
-
-}
-
-
-function handleNewBoard(){
-
-const name = prompt(' Nombre de la Tabla ');
-
- if(!!name){
-     
-boards.push({
-
+  console.log(text.value, board.id, board.name);
+  board.items.push({
     id: crypto.randomUUID(),
-    name: name,
-    items: [
-      
-    ],
+    title: text,
+  });
+}
 
+function handleNewBoard() {
+  const name = prompt(" Nombre de la Tabla ");
+
+  if (!!name) {
+    boards.push({
+      id: crypto.randomUUID(),
+      name: name,
+      items: [],
+    });
+  }
+}
+
+function starDrag(evt, board, item){
+
+}
+function onDrop(evt, dest){
 
 }
 
-);
 
- }
-}
+
 </script>
 
 <template>
   <nav>
     <ul>
-      <li><a href="#" @click.prevent = "handleNewBoard" >Create Board</a></li>
+      <li><a href="#" @click.prevent="handleNewBoard">Create Board</a></li>
     </ul>
   </nav>
 
   <div class="boards-container">
     <div class="boards">
-      <div class="board" v-for="board in boards" :key="board.id">
+      <div class="board" 
+      @drop="onDrop($event, board)" 
+      @dragover.prevent 
+      @dragenter.prevent  
+      v-for="board in boards" 
+      :key="board.id">
+
         <div>{{ board.name }}</div>
 
-        <InputNew :on-new-item="(text)=> handleNewItem(text, board)" />
+        <InputNew :on-new-item="(text) => handleNewItem(text, board)" />
 
         <div class="items">
-          <div class="item" v-for="item in board.items" :key="item.id">
+          <div class="item" 
+          draggable="true" 
+          @drastart="starDrag($event, board,item )" 
+          v-for="item in board.items" 
+          :key="item.id">
             {{ item.title }}
           </div>
         </div>
