@@ -1,5 +1,5 @@
 module.exports = {
 
- publicPath: "/template-project-vue-stylelint/"
+ publicPath: "/camba_vue/"
 
 }
