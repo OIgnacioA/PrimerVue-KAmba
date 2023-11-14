@@ -56,7 +56,7 @@ function handleNewBoard() {
 function starDrag(evt, board, item) {
   evt.dataTransfer.setData(
     "text/plain",
-    JSON.stringify({ boardId: board.id, itemId: item.id }) // Enclose the object in quotes
+    JSON.stringify({ boardId: board.id, itemId: item.id }) 
   );
 }
 
@@ -72,6 +72,8 @@ function onDrop(evt, dest){
    console.log(originBoard.name, originItem.title); 
 
 
+   dest.items.push({...originItem})
+   originBoard.items = originBoard.items.filter(item=> item !== originItem);
 }
 
 
