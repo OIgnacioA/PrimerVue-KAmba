@@ -61,12 +61,51 @@ let boards = reactive([
 
             <div class="board" v-for="board in boards" :key="board.id">
                 <div>{{ board.name }}</div>
-                <div class="item" v-for="item in board.items" :key="item.id">
-                    {{ item.title }}</div>
+                <div class="items">
+                    <div class="item" v-for="item in board.items" :key="item.id">
+                        {{ item.title }}
+                    </div>
+            </div>
             </div>
 
         </div>
     </div>
+
 </template>
 
-<Style scoped></Style>
+<style scoped>
+
+.drop-zone {
+  background-color: #eee;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.drag-el {
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.boards {
+  display: flex;
+  gap: 10px;
+}
+
+.board {
+  background: #ccc;
+  padding: 10px;
+
+}
+.items{
+display: flex;
+flex-direction: column;
+gap: 5px;
+
+}
+
+.item{
+  background: white;
+  padding: 10px;
+  box-sizing: border-box;
+}
+</style>
